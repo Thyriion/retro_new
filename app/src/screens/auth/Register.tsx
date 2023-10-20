@@ -1,16 +1,17 @@
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import React, { useState } from 'react'
-import { Button, Text, TextInput, useTheme } from 'react-native-paper'
+import { Button, TextInput } from 'react-native-paper'
 import { MD2DarkTheme } from '../../styles/themes';
 import { AuthService } from '../../services/AuthService';
 
-const Login = ({ navigation }) => {
-    const theme = MD2DarkTheme;
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
+const Register = ({ navigation }) => {
+    const [userEmail, setUserEmail] = useState("");
+    const [userPassword, setUserPassword] = useState("");
 
-    function login() {
-        AuthService.signInUser(userEmail, userPassword);
+    const theme = MD2DarkTheme;
+
+    function createUser() {
+        AuthService.createUser(userEmail, userPassword);
     }
 
     return (
@@ -20,6 +21,7 @@ const Login = ({ navigation }) => {
                 value={userEmail}
                 onChangeText={text => setUserEmail(text)}
                 activeUnderlineColor={theme.colors.accent}
+                textContentType='emailAddress'
             />
             <TextInput
                 label="Passwort"
@@ -32,15 +34,11 @@ const Login = ({ navigation }) => {
             <Button
                 mode="contained"
                 contentStyle={{ height: 50 }}
-                onPress={() => login()}
-            >
-                Einloggen
-            </Button>
-            <Button
-                mode="contained"
-                contentStyle={{ height: 50 }}
-                buttonColor={theme.colors.accent}
-                onPress={() => navigation.navigate("Register")}
+                buttonColor={theme.colors.primary}
+                onPress={() => navigation.navigate("ChooseTeam", {
+                    userEmail: userEmail,
+                    userPassword: userPassword
+                })}
             >
                 <Text>Registrieren</Text>
             </Button>
@@ -48,4 +46,4 @@ const Login = ({ navigation }) => {
     )
 }
 
-export default Login
+export default Register

@@ -5,23 +5,34 @@
  * @format
  */
 
-import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { PaperProvider, Text } from 'react-native-paper';
 import { MD2DarkTheme } from './src/styles/themes';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AuthStack from './src/screens/AuthStack';
 
 
 function App(): JSX.Element {
   const theme = MD2DarkTheme;
+
+  const navTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: theme.colors.background,
+      card: theme.colors.accent,
+    }
+  }
+
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <SafeAreaView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+      <SafeAreaProvider>
+        <NavigationContainer theme={navTheme}>
           <AuthStack />
-        </SafeAreaView>
-      </NavigationContainer>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </PaperProvider >
   );
 }

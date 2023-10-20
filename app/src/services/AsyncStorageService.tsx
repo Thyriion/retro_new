@@ -8,7 +8,12 @@ async function setCurrentUser(user: string) {
     await AsyncStorage.setItem("user", user);
 }
 
+async function removeCurrentUser() {
+    await AsyncStorage.removeItem("user");
+}
+
 export const AsyncStorageService = {
     getCurrentUser,
-    setCurrentUser
+    setCurrentUser,
+    removeCurrentUser
 }

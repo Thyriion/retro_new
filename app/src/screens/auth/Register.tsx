@@ -2,17 +2,12 @@ import { View, Text } from 'react-native'
 import React, { useState } from 'react'
 import { Button, TextInput } from 'react-native-paper'
 import { MD2DarkTheme } from '../../styles/themes';
-import { AuthService } from '../../services/AuthService';
 
 const Register = ({ navigation }) => {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
     const theme = MD2DarkTheme;
-
-    function createUser() {
-        AuthService.createUser(userEmail, userPassword);
-    }
 
     return (
         <View style={{ justifyContent: "center", flex: 1, marginHorizontal: 10, gap: 10 }}>
